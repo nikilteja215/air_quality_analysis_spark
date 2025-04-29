@@ -2,26 +2,24 @@
 
 ## ✅ Section 1: Data Ingestion and Initial Pre-Processing
 
-### Goals:
-- Ingest raw air quality data using Spark Structured Streaming
-- Parse and structure the data (PM2.5, temperature, humidity)
-- Clean and merge the data into a single DataFrame
+## Objective
+In this section, we ingested raw air quality data from a TCP server, parsed it, structured it properly, converted datatypes, and saved it cleanly into CSV files for further processing.
 
-### Data Source:
-Historical data was streamed over a TCP connection using a custom TCP socket server simulating live data.
+## Steps Performed
 
-### 🛠️TCP Server Commands Used:
-To run the TCP server: `ingestion/tcp_log_file_streaming_server.py`
-```bash
-python ingestion/tcp_log_file_streaming_server.py
-```
-To run Spark Structured Streaming: `ingestion/spark_streaming_ingestion.py`
-```bash
-python ingestion/spark_streaming_ingestion.py
-```
+### 1. TCP Server Setup
+- **File:** `ingestion/tcp_log_file_streaming_server.py`
+- **Purpose:** Simulate a live data stream by sending records over TCP.
+- **Command Used:**
+  ```bash
+  python ingestion/tcp_log_file_streaming_server.py
+  ```
+- **Note:** Wait for "Client connected" and "Reading from" messages before proceeding.
 
-### Spark Streaming Script Used:
-`ingestion/spark_streaming_ingestion.py`
+### 2. Spark Streaming Client
+- **File:** `ingestion/spark_streaming_ingestion.py`
+- **Purpose:** Read data from the TCP server, clean it, and store it into CSVs.
+- **Code Logic:**
 ```python
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import split, col, to_timestamp
@@ -71,22 +69,50 @@ query = (
 )
 
 query.awaitTermination()
-```
+  ```
 
-### Final Output:
-All `.csv` files were written to:
-- `section1/output/clean_data_csv/`
-- Checkpointing to `section1/output/checkpoint_dir_csv/`
+- **Command Used to Run:**
+  ```bash
+  python ingestion/spark_streaming_ingestion.py
+  ```
 
-### Git Commands:
+### 3. Changes in Repository Structure
+- Moved the output files (`clean_data_csv` and `checkpoint_dir_csv`) to `section1/output/`.
+- Organized the repository into logical sections.
+
+### 4. Git Commands Used
 ```bash
+git add ingestion/tcp_log_file_streaming_server.py
+git add ingestion/spark_streaming_ingestion.py
 git add section1/output/clean_data_csv/*.csv
-git add section1/output/checkpoint_dir_csv
+git add section1/output/checkpoint_dir_csv/*
 git commit -m "✅ Section 1 complete: Nikil Teja."
 git push origin master
 ```
 
+## Output Folder Structure After Section 1
+```
+section1/
+├── output/
+    ├── clean_data_csv/  # Contains cleaned CSV files.
+    └── checkpoint_dir_csv/  # Streaming checkpoint files.
+```
+
+## Sample Output (CSV Schema)
+| timestamp                  | region  | PM2_5 | temperature | humidity |
+|-----------------------------|---------|-------|-------------|----------|
+| 2004-03-10T18:00:00.000Z    | Region1 | 1268  | 13          | 6        |
+| 2004-03-10T19:00:00.000Z    | Region1 | 972   | 13          | 3        |
+
+## Important Notes
+- `.crc` files are generated automatically by Spark. We cleaned them manually afterward.
+- Only **CSV files** were pushed to GitHub; checkpoint files are only local.
+
 ---
+✨ **Section 1 Successfully Completed!** ✨
+
+Next: Moving to **Section 2: Feature Engineering and Transformations** 🚀
+
 
 # ✅ Section 2: Data Aggregations, Transformations & Trend Analysis
 
@@ -214,3 +240,7 @@ git push origin master
 ```
 
 ---
+
+✨ **Section 2 Successfully Completed!** ✨
+
+Next: Moving to **Section 3: Spark SQL Exploration & Correlation Analysis** 🚀
