@@ -244,3 +244,43 @@ git push origin master
 ✨ **Section 2 Successfully Completed!** ✨
 
 Next: Moving to **Section 3: Spark SQL Exploration & Correlation Analysis** 🚀
+
+**Section 3** 
+
+# Air Quality Analysis with Apache Spark
+
+This task performs data-driven air quality analysis using Apache Spark, focusing on PM2.5 measurements. It includes data cleaning, aggregation, correlation analysis, and classification of air quality risk based on AQI standards.
+
+
+## 🚀 Section 3: Spark SQL Exploration & Correlation Analysis
+
+This module focuses on deeper insights from air quality data using PySpark SQL.
+
+### ✅ Features Implemented:
+- Register cleaned data as a Spark SQL view
+- Run complex SQL queries to identify pollution trends and hotspots
+- Use window functions (`LAG`, `LEAD`) for trend analysis
+- Classify regions using a simplified AQI UDF
+- Output all results to `section3/output/`
+
+---
+
+### 🔧 How to Run
+
+#### 🖥️ Prerequisites
+- Apache Spark installed
+- Java installed and `JAVA_HOME` set
+- PySpark accessible via terminal
+
+#### 📦 Install Requirements (if needed)
+
+pip install pyspark
+#### Run the script
+spark-submit section3/section3_air_quality_analysis.py
+
+File:Folder	Description
+highest_avg_pm25_24h: Regions with the highest PM2.5 over the last 24 hours
+peak_pollution_intervals:	Hours of day with highest PM2.5 per region
+pm25_trend_increase:	Sudden or sustained PM2.5 spikes detected using window functions
+aqi_classification_summary:	Region-based AQI classification: Good, Moderate, Unhealthy
+**Section 3 Successfully Completed!** 
