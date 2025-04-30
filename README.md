@@ -284,3 +284,50 @@ peak_pollution_intervals:	Hours of day with highest PM2.5 per region
 pm25_trend_increase:	Sudden or sustained PM2.5 spikes detected using window functions
 aqi_classification_summary:	Region-based AQI classification: Good, Moderate, Unhealthy
 **Section 3 Successfully Completed!** 
+
+# 📊 Section 5: Dashboard Visualization - Air Quality Monitoring & Forecasting
+
+This module visualizes feature-engineered air quality data to detect pollution trends, classify AQI categories, and analyze environmental correlations. Outputs are saved as high-quality PNG images for static reporting and analysis.
+
+---
+
+## ✅ Features Implemented
+
+| Step | Description |
+|------|-------------|
+| 1️⃣ | Load and combine feature-engineered CSV files from Section 2 |
+| 2️⃣ | Parse timestamps and sort data chronologically |
+| 3️⃣ | Classify PM2.5 values into AQI categories (`Good`, `Moderate`, `Unhealthy`) |
+| 4️⃣ | Plot actual vs lagged PM2.5 over time (line chart) |
+| 5️⃣ | Visualize PM2.5 spikes > 100 using a scatter plot |
+| 6️⃣ | Show AQI category proportions with a pie chart |
+| 7️⃣ | Compute correlation matrix (PM2.5, temperature, humidity) and display as heatmap |
+| 8️⃣ | Save enriched dashboard dataset as CSV |
+
+---
+
+## 📂 Input
+
+**Path:**  
+`section2/output/feature_engineered_data/part-*.csv`
+## output columns
+timestamp, PM2_5, PM2_5_lag1, temperature, humidity, AQI_Category
+
+All output files are saved to:  
+`section5/output/`
+
+### 📷 Visualizations (PNG):
+- `pm25_actual_vs_lagged.png`
+- `spike_events.png`
+- `aqi_pie_chart.png`
+- `correlation_matrix.png`
+
+### 📄 CSV:
+- `dashboard_data.csv`
+## 🧪 How to Run
+python section5/pipeline_dashboard.py
+
+
+
+
+
