@@ -114,7 +114,7 @@ section1/
 Next: Moving to **Section 2: Feature Engineering and Transformations** 🚀
 
 
-# ✅ Section 2: Data Aggregations, Transformations & Trend Analysis
+## ✅ Section 2: Data Aggregations, Transformations & Trend Analysis
 
 ## Goal
 Improve data quality by:
@@ -245,14 +245,7 @@ git push origin master
 
 Next: Moving to **Section 3: Spark SQL Exploration & Correlation Analysis** 🚀
 
-**Section 3** 
-
-# Air Quality Analysis with Apache Spark
-
-This task performs data-driven air quality analysis using Apache Spark, focusing on PM2.5 measurements. It includes data cleaning, aggregation, correlation analysis, and classification of air quality risk based on AQI standards.
-
-
-## 🚀 Section 3: Spark SQL Exploration & Correlation Analysis
+## ✅ Section 3: Spark SQL Exploration & Correlation Analysis
 
 This module focuses on deeper insights from air quality data using PySpark SQL.
 
@@ -285,7 +278,126 @@ pm25_trend_increase:	Sudden or sustained PM2.5 spikes detected using window func
 aqi_classification_summary:	Region-based AQI classification: Good, Moderate, Unhealthy
 **Section 3 Successfully Completed!** 
 
-# 📊 Section 5: Pipeline Integration & Dashboard Visualization
+✨ **Section 3 Successfully Completed!** ✨
+
+## ✅ Section 4: ML Model Training with Spark MLlib
+
+This section focuses on training, evaluating, and saving a predictive machine learning model using Spark MLlib to forecast PM2.5 values.
+
+---
+
+## 📊 Objective
+
+- Predict PM2.5 using engineered features.
+- Evaluate model performance using RMSE and R².
+- Output predictions and evaluation metrics into a unified CSV.
+
+---
+
+## 📁 Input
+
+Feature-enhanced data from **Section 2**:  
+`section2/output/feature_engineered_data/*.csv`
+
+---
+
+## 🧪 Steps Performed
+
+### 1. Start Spark Session
+```python
+spark = SparkSession.builder.appName("AirQualityModelTraining").getOrCreate()
+```
+
+---
+
+### 2. Load Data
+```python
+df = spark.read.option("header", True).option("inferSchema", True).csv("section2/output/feature_engineered_data/*.csv")
+```
+
+---
+
+### 3. Data Preprocessing
+- Drop rows with null values in `PM2_5_lag1`, `PM2_5_rate_change`
+- Select features: `PM2_5_lag1`, `temperature`, `humidity`, `PM2_5_rate_change`
+- Assemble features into vector column
+
+---
+
+### 4. Train/Test Split
+```python
+train_df, test_df = assembled_df.randomSplit([0.8, 0.2], seed=42)
+```
+
+---
+
+### 5. Model Training with CrossValidator
+- Linear Regression model
+- Cross-validation with 3 folds
+- Parameter grid:
+  - `regParam`: 0.01, 0.1, 0.5
+  - `elasticNetParam`: 0.0, 0.5, 1.0
+
+---
+
+### 6. Evaluation
+- Predict on test set
+- Calculate RMSE and R² using `RegressionEvaluator`
+
+---
+
+### 7. Output
+- Combine predictions with original values
+- Add RMSE and R² as additional columns
+- Save to CSV:
+```python
+result_df.write.mode("overwrite").option("header", True).csv("section4/output/predictions.csv")
+```
+
+Columns included in the output:
+- `timestamp`
+- `region`
+- `PM2_5`
+- `prediction`
+
+---
+
+### ✅ Example Output
+
+```csv
+timestamp,region,PM2_5,prediction
+2004-03-10T20:00:00.000Z,Region1,1074.0,1191.42
+...
+```
+
+---
+
+## 📦 Files Created
+
+- Trained model: `section4/output/best_model/`
+- Predictions: `section4/output/predictions.csv`
+- Metrics: `section4/output/metrics.csv`
+
+---
+
+## ✅ Outcome
+
+- A trained, tuned model to predict PM2.5.
+- Evaluation metrics calculated and stored.
+- Data ready for potential real-time prediction integration.
+
+---
+
+## 💡 Notes
+
+- The first row is skipped during training due to nulls in lag features.
+- Ideal for future ML extensions or deployment with streaming pipelines.
+
+✨ **Section 4 Successfully Completed!** ✨
+
+Next: Moving to **Section 5: Pipeline Integration & Dashboard Visualization** 🚀
+
+## ✅ Section 5: Pipeline Integration & Dashboard Visualization
 
 This module visualizes feature-engineered air quality data to detect pollution trends, classify AQI categories, and analyze environmental correlations. Outputs are saved as high-quality PNG images for static reporting and analysis.
 
@@ -325,9 +437,9 @@ All output files are saved to:
 ### 📄 CSV:
 - `dashboard_data.csv`
 ## 🧪 How to Run
-python section5/pipeline_dashboard.py
+```python section5/pipeline_dashboard.py```
 
-
+✨ **Section 5 Successfully Completed!** ✨
 
 
 
