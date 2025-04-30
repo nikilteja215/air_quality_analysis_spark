@@ -285,7 +285,7 @@ pm25_trend_increase:	Sudden or sustained PM2.5 spikes detected using window func
 aqi_classification_summary:	Region-based AQI classification: Good, Moderate, Unhealthy
 **Section 3 Successfully Completed!** 
 
-# 📊 Section 5: Dashboard Visualization - Air Quality Monitoring & Forecasting
+# 📊 Section 5: Pipeline Integration & Dashboard Visualization
 
 This module visualizes feature-engineered air quality data to detect pollution trends, classify AQI categories, and analyze environmental correlations. Outputs are saved as high-quality PNG images for static reporting and analysis.
 
