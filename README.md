@@ -1,11 +1,11 @@
 # Air Quality Analysis using Apache Spark
 
 ## Contributors:
-Section - 1: Nikil Teja
-Section - 2: Bhargavi Potu
-Section - 3: Sruthi Bandi
-Section - 4: Prakathesh
-Section - 5: Sai Venkat
+- Section - 1: Nikil Teja
+- Section - 2: Bhargavi Potu
+- Section - 3: Prakathesh
+- Section - 4: Sruthi Bandi 
+- Section - 5: Sai Venkat
 
 ## ✅ Section 1: Data Ingestion and Initial Pre-Processing
 
